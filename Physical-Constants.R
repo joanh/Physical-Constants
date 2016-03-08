@@ -7,7 +7,7 @@ library(stringr)
 GH_url <- "https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv"
 PhysicalConstants <- read.csv(GH_url, header = TRUE, sep = ",",dec = ".")
 ## from local (after downloading "Fundamental-Physical-Constants.csv") use read.table:
-## PhyConst <- read.table("~/R/Physical Constants/Fundamental-Physical-Constants.csv",
+## PhysicalConstants <- read.table("~/R/Physical Constants/Fundamental-Physical-Constants.csv",
 ## header = TRUE, sep = ",",dec = ".")
 ### removing spaces from "Value" and "Uncertainty" text columns:
 PhysicalConstants$Value <- str_replace_all(PhysicalConstants$Value, fixed(" "), "")
