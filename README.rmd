@@ -1,0 +1,89 @@
+---
+title: "Fundamental Physical Constants"
+output: github_document
+---
+
+Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
+
+## Data source:
+
+**Fundamental Physical Constants --- Complete Listing**
+from the [NIST reference on Constants, Units, and Uncertainity](https://physics.nist.gov/cuu/Constants/index.html). 
+Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.txt) edited through [Open Refine](http://openrefine.org/) to get [this csv file](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv), and then the few chunks of **R** code shown below.
+
+
+## Code
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r results='hide', message=FALSE, warning=FALSE}
+library(knitr)
+library(stringr)
+library(ggplot2)
+```
+First we import the csv file from the [github repository](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)
+
+```{r evaluate=TRUE}
+GH_url <- "https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv"
+PhysicalConstants <- read.csv(GH_url, header = TRUE, sep = ",",dec = ".")
+
+```
+
+You can do it from your local computer too after downloading the file  "[Fundamental-Physical-Constants.csv](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)" through '[read.table](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html)' command:
+
+``` {r evaluate=FALSE}
+# PhysicalConstants <- read.table("~/R/Physical Constants/Fundamental-Physical-Constants.csv",
+# header = TRUE, sep = ",",dec = ".")
+```
+Then you need remove the spaces from "Value" and "Uncertainty" text columns:
+
+``` {r evaluate=TRUE}
+PhysicalConstants$Value <- str_replace_all(PhysicalConstants$Value, fixed(" "), "")
+PhysicalConstants$Uncertainty <- str_replace_all(PhysicalConstants$Uncertainty, fixed(" "), "")
+```
+
+and fit the residual characters coming from exact values:
+
+``` {r evaluate=TRUE}
+PhysicalConstants$Value <- str_replace_all(PhysicalConstants$Value, fixed("..."), "")
+PhysicalConstants$Uncertainty <- str_replace_all(PhysicalConstants$Uncertainty, fixed("(exact)"), "0.0")
+```
+
+You can now convert strings to numeric (scientific notation):
+
+``` {r evaluate=TRUE}
+PhysicalConstants$Value <- as.numeric(PhysicalConstants$Value)
+PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
+
+```
+
+
+## Order of magnitude histogram
+
+Just a quick graphical test in order to check everything went right, a histogram made from the count of values of the base 10 logarithm of the absolute value of each physical constant, in other words, the exponent of the constant, i.e. its *order of magnitude*.
+
+```{r evaluate=TRUE, fig.width=12,fig.height=9}
+histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Value)))) +
+  geom_histogram(col="orange", 
+                 aes(fill=..count..), binwidth= .75) +
+  scale_fill_gradient("Count", low="cyan", high="blue") +
+  geom_density(aes(y =..count..), colour="red", adjust=0.3, size=0.3) +
+  geom_density(aes(y =..count..), colour="red", adjust=3, size=1) +
+  ggtitle("Histogram for physical constants") +
+  labs(x="Order of magnitude", y="Count")
+print(histogram)
+```
+
+## Table
+
+And finally a quick table (pending to take a look to the R interface to the JavaScript library suggested [here](https://stackoverflow.com/questions/27120002/is-it-possible-to-have-sortableinteractive-table-in-rmarkdown). Start [here](http://rstudio.github.io/DT/)).
+
+
+Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this issue thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
+
+``` {r evaluate=TRUE}
+kable(PhysicalConstants,format = "markdown", digits = 70)
+
+```
