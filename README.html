@@ -128,9 +128,11 @@ $(document).ready(function () {
 <div id="code" class="section level2">
 <h2>Code</h2>
 <pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)</code></pre>
-<pre class="r"><code>library(knitr)
+<pre class="r"><code># Install packages through `install.packages` command and load them to the environment
+library(knitr)
 library(stringr)
-library(ggplot2)</code></pre>
+library(ggplot2)
+library(printr)</code></pre>
 <p>First we import the csv file from the <a href="https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv">github repository</a></p>
 <pre class="r"><code>GH_url &lt;- &quot;https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv&quot;
 PhysicalConstants &lt;- read.csv(GH_url, header = TRUE, sep = &quot;,&quot;,dec = &quot;.&quot;)</code></pre>
@@ -146,6 +148,56 @@ PhysicalConstants$Uncertainty &lt;- str_replace_all(PhysicalConstants$Uncertaint
 <p>You can now convert strings to numeric (scientific notation):</p>
 <pre class="r"><code>PhysicalConstants$Value &lt;- as.numeric(PhysicalConstants$Value)
 PhysicalConstants$Uncertainty &lt;- as.numeric(PhysicalConstants$Uncertainty)</code></pre>
+<p>These are the five first lines of the table:</p>
+<pre class="r"><code>head(PhysicalConstants)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Quantity</th>
+<th align="right">Value</th>
+<th align="left">Unit</th>
+<th align="right">Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">{220} Lattice Spacing Of Silicon</td>
+<td align="right">0.000000</td>
+<td align="left">m</td>
+<td align="right">0.0e+00</td>
+</tr>
+<tr class="even">
+<td align="left">Alpha Particle-electron Mass Ratio</td>
+<td align="right">7294.299541</td>
+<td align="left"></td>
+<td align="right">2.0e-07</td>
+</tr>
+<tr class="odd">
+<td align="left">Alpha Particle Mass</td>
+<td align="right">0.000000</td>
+<td align="left">kg</td>
+<td align="right">0.0e+00</td>
+</tr>
+<tr class="even">
+<td align="left">Alpha Particle Mass Energy Equivalent</td>
+<td align="right">0.000000</td>
+<td align="left">J</td>
+<td align="right">0.0e+00</td>
+</tr>
+<tr class="odd">
+<td align="left">Alpha Particle Mass Energy Equivalent In Mev</td>
+<td align="right">3727.379378</td>
+<td align="left">MeV</td>
+<td align="right">2.3e-05</td>
+</tr>
+<tr class="even">
+<td align="left">Alpha Particle Mass In U</td>
+<td align="right">4.001506</td>
+<td align="left">u</td>
+<td align="right">0.0e+00</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="order-of-magnitude-histogram" class="section level2">
 <h2>Order of magnitude histogram</h2>

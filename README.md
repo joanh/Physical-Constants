@@ -18,9 +18,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```r
+# Install packages through `install.packages` command and load them to the environment
 library(knitr)
 library(stringr)
 library(ggplot2)
+library(printr)
 ```
 First we import the csv file from the [github repository](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)
 
@@ -61,6 +63,23 @@ PhysicalConstants$Value <- as.numeric(PhysicalConstants$Value)
 PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 ```
 
+These are the five first lines of the table: 
+
+
+```r
+head(PhysicalConstants)
+```
+
+
+
+Quantity                                              Value  Unit    Uncertainty
+---------------------------------------------  ------------  -----  ------------
+{220} Lattice Spacing Of Silicon                   0.000000  m           0.0e+00
+Alpha Particle-electron Mass Ratio              7294.299541              2.0e-07
+Alpha Particle Mass                                0.000000  kg          0.0e+00
+Alpha Particle Mass Energy Equivalent              0.000000  J           0.0e+00
+Alpha Particle Mass Energy Equivalent In Mev    3727.379378  MeV         2.3e-05
+Alpha Particle Mass In U                           4.001506  u           0.0e+00
 
 ## Order of magnitude histogram
 
@@ -79,7 +98,7 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
 print(histogram)
 ```
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ## Table
 

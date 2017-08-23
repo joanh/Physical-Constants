@@ -5,6 +5,7 @@
 library(knitr)
 library(stringr)
 library(ggplot2)
+library(printr)
 ### Read file:
 GH_url <- "https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv"
 PhysicalConstants <- read.csv(GH_url, header = TRUE, sep = ",",dec = ".")
