@@ -66,7 +66,7 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 Just a quick graphical test in order to check everything went right, a histogram made from the count of values of the base 10 logarithm of the absolute value of each physical constant, in other words, the exponent of the constant, i.e. its *order of magnitude*.
 
-```{r evaluate=TRUE, echo=TRUE, fig.height=9, fig.width=12}
+```{r evaluate=TRUE, echo=TRUE, fig.height=6, fig.width=9}
 histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Value)))) +
   geom_histogram(col="orange", 
                  aes(fill=..count..), binwidth= .75) +
