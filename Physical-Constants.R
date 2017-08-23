@@ -32,6 +32,6 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
   geom_density(aes(y =..count..), colour="red", adjust=0.3, size=0.3) +
   geom_density(aes(y =..count..), colour="red", adjust=3, size=1) +
   ggtitle("Histogram for physical constants") +
-  labs(x="Base 10 logarithm of the absolute value of each physical constant", y="Count")
+  labs(x="Order of magnitude", y="Count")
 print(histogram)
 
