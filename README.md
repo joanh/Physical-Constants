@@ -67,7 +67,7 @@ These are the five first lines of the table:
 
 
 ```r
-head(PhysicalConstants)
+kable(head(PhysicalConstants))
 ```
 
 

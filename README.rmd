@@ -65,10 +65,8 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 These are the five first lines of the table: 
 
-```{r evaluate=TRUE}
-
-head(PhysicalConstants)
-
+```{r evaluate=TRUE, echo=TRUE}
+kable(head(PhysicalConstants))
 ```
 
 ## Order of magnitude histogram
