@@ -67,7 +67,7 @@ These are the five first lines of the table:
 
 
 ```r
-kable(head(PhysicalConstants))
+kable(head(PhysicalConstants, format = "markdown", digits = 70))
 ```
 
 
