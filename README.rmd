@@ -1,14 +1,13 @@
 ---
 title: "Fundamental Physical Constants"
 author: "Joanh"
-date: "2016"
+date: "2015"
 output:
     html_document:
       toc: true
       toc_float: true
       keep_md: true
 ---
-
 Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
 
 ## Data source
@@ -21,7 +20,7 @@ Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.tx
 ## Code
 
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r results='hide', message=FALSE, warning=FALSE}
@@ -72,17 +71,19 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 Just a quick graphical test in order to check everything went right, a histogram made from the count of values of the base 10 logarithm of the absolute value of each physical constant, in other words, the exponent of the constant, i.e. its *order of magnitude*.
 
-```{r, evaluate=TRUE, echo=TRUE, fig.height=6, fig.width=9}
+```{r, eval=FALSE, echo=TRUE}
 histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Value)))) +
   geom_histogram(col="orange", 
                  aes(fill=..count..), binwidth= .75) +
   scale_fill_gradient("Count", low="cyan", high="blue") +
   geom_density(aes(y =..count..), colour="red", adjust=0.3, size=0.3) +
   geom_density(aes(y =..count..), colour="red", adjust=3, size=1) +
-  ggtitle("Histogram for physical constants") +
+  ggtitle("Order of magnitude histogram for physical constants") +
   labs(x="Order of magnitude", y="Count")
 print(histogram)
 ```
+
+![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
 
 ## Table
 

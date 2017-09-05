@@ -1,7 +1,6 @@
 # Fundamental Physical Constants
 Joanh  
-2016  
-
+2015  
 Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
 
 ## Data source
@@ -15,55 +14,28 @@ Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.tx
 
 
 ```r
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-```r
-# Install packages through `install.packages` command and load them to the environment
-library(knitr)
-library(stringr)
-library(ggplot2)
-library(printr)
-```
 First we import the csv file from the [github repository](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)
 
 
-```r
-GH_url <- "https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv"
-PhysicalConstants <- read.csv(GH_url, header = TRUE, sep = ",",dec = ".")
-```
 
 You can do it from your local computer too after downloading the file  "[Fundamental-Physical-Constants.csv](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)" through '[read.table](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html)' command:
 
 
-```r
-# PhysicalConstants <- read.table("~/R/Physical Constants/Fundamental-Physical-Constants.csv",
-# header = TRUE, sep = ",",dec = ".")
-```
 Then you need remove the spaces from "Value" and "Uncertainty" text columns:
 
 
-```r
-PhysicalConstants$Value <- str_replace_all(PhysicalConstants$Value, fixed(" "), "")
-PhysicalConstants$Uncertainty <- str_replace_all(PhysicalConstants$Uncertainty, fixed(" "), "")
-```
 
 and fit the residual characters coming from exact values:
 
 
-```r
-PhysicalConstants$Value <- str_replace_all(PhysicalConstants$Value, fixed("..."), "")
-PhysicalConstants$Uncertainty <- str_replace_all(PhysicalConstants$Uncertainty, fixed("(exact)"), "0.0")
-```
 
 You can now convert strings to numeric (scientific notation):
 
 
-```r
-PhysicalConstants$Value <- as.numeric(PhysicalConstants$Value)
-PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
-```
 
 
 ## Order of magnitude histogram
@@ -78,12 +50,12 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
   scale_fill_gradient("Count", low="cyan", high="blue") +
   geom_density(aes(y =..count..), colour="red", adjust=0.3, size=0.3) +
   geom_density(aes(y =..count..), colour="red", adjust=3, size=1) +
-  ggtitle("Histogram for physical constants") +
+  ggtitle("Order of magnitude histogram for physical constants") +
   labs(x="Order of magnitude", y="Count")
 print(histogram)
 ```
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
 
 ## Table
 
@@ -91,12 +63,6 @@ And finally a quick table (pending to take a look to the R interface to the Java
 
 
 Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
-
-
-```r
-kable(PhysicalConstants,format = "markdown", digits = 70)
-```
-
 
 
 |Quantity                                                |         Value|Unit           | Uncertainty|
