@@ -1,8 +1,10 @@
 # Fundamental Physical Constants
+Joanh  
+2016  
 
 Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
 
-## Data source:
+## Data source
 
 **Fundamental Physical Constants --- Complete Listing**
 from the [NIST reference on Constants, Units, and Uncertainity](https://physics.nist.gov/cuu/Constants/index.html). 
@@ -63,23 +65,6 @@ PhysicalConstants$Value <- as.numeric(PhysicalConstants$Value)
 PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 ```
 
-These are the five first lines of the table: 
-
-
-```r
-kable(head(PhysicalConstants, format = "markdown", digits = 70))
-```
-
-
-
-Quantity                                              Value  Unit    Uncertainty
----------------------------------------------  ------------  -----  ------------
-{220} Lattice Spacing Of Silicon                   0.000000  m           0.0e+00
-Alpha Particle-electron Mass Ratio              7294.299541              2.0e-07
-Alpha Particle Mass                                0.000000  kg          0.0e+00
-Alpha Particle Mass Energy Equivalent              0.000000  J           0.0e+00
-Alpha Particle Mass Energy Equivalent In Mev    3727.379378  MeV         2.3e-05
-Alpha Particle Mass In U                           4.001506  u           0.0e+00
 
 ## Order of magnitude histogram
 
@@ -98,7 +83,7 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
 print(histogram)
 ```
 
-![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ## Table
 

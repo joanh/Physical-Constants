@@ -1,13 +1,17 @@
 ---
 title: "Fundamental Physical Constants"
+author: "Joanh"
+date: "2016"
 output:
-  html_document:
-    keep_md: true
+    html_document:
+      toc: true
+      toc_float: true
+      keep_md: true
 ---
 
 Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
 
-## Data source:
+## Data source
 
 **Fundamental Physical Constants --- Complete Listing**
 from the [NIST reference on Constants, Units, and Uncertainity](https://physics.nist.gov/cuu/Constants/index.html). 
@@ -63,11 +67,6 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 ```
 
-These are the five first lines of the table: 
-
-```{r evaluate=TRUE}
-kable(head(PhysicalConstants, format = "markdown", digits = 70))
-```
 
 ## Order of magnitude histogram
 
