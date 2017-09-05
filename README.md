@@ -90,7 +90,7 @@ print(histogram)
 And finally a quick table (pending to take a look to the R interface to the JavaScript library suggested [here](https://stackoverflow.com/questions/27120002/is-it-possible-to-have-sortableinteractive-table-in-rmarkdown). Start [here](http://rstudio.github.io/DT/)).
 
 
-Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this issue thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
+Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
 
 
 ```r

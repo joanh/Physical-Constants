@@ -268,7 +268,7 @@ print(histogram)</code></pre>
 <div id="table" class="section level2">
 <h2>Table</h2>
 <p>And finally a quick table (pending to take a look to the R interface to the JavaScript library suggested <a href="https://stackoverflow.com/questions/27120002/is-it-possible-to-have-sortableinteractive-table-in-rmarkdown">here</a>. Start <a href="http://rstudio.github.io/DT/">here</a>).</p>
-<p>Note tha we have to setup the <code>digits</code> value because by default number is truncated to 7 decimal places (<strong><a href="https://github.com/yihui">yihui</a></strong> himself explain it in <a href="https://github.com/yihui/knitr/issues/1187">this issue thread</a>), and we can see in the above histogram we need about 70 to cover smallest constants.</p>
+<p>Note tha we have to setup the <code>digits</code> value because by default number is truncated to 7 decimal places (<strong><a href="https://github.com/yihui">yihui</a></strong> himself explain it in <a href="https://github.com/yihui/knitr/issues/1187">this thread</a>), and we can see in the above histogram we need about 70 to cover smallest constants.</p>
 <pre class="r"><code>kable(PhysicalConstants,format = &quot;markdown&quot;, digits = 70)</code></pre>
 <table style="width:100%;">
 <colgroup>

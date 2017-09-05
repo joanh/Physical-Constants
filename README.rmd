@@ -72,7 +72,7 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 Just a quick graphical test in order to check everything went right, a histogram made from the count of values of the base 10 logarithm of the absolute value of each physical constant, in other words, the exponent of the constant, i.e. its *order of magnitude*.
 
-```{r evaluate=TRUE, echo=TRUE, fig.height=6, fig.width=9}
+```{r, evaluate=TRUE, echo=TRUE, fig.height=6, fig.width=9}
 histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Value)))) +
   geom_histogram(col="orange", 
                  aes(fill=..count..), binwidth= .75) +
@@ -89,7 +89,7 @@ print(histogram)
 And finally a quick table (pending to take a look to the R interface to the JavaScript library suggested [here](https://stackoverflow.com/questions/27120002/is-it-possible-to-have-sortableinteractive-table-in-rmarkdown). Start [here](http://rstudio.github.io/DT/)).
 
 
-Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this issue thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
+Note tha we have to setup the `digits` value because by default number is truncated to 7 decimal places (**[yihui](https://github.com/yihui)** himself explain it in [this thread](https://github.com/yihui/knitr/issues/1187)), and we can see in the above histogram we need about 70 to cover smallest constants. 
 
 ```{r evaluate=TRUE}
 kable(PhysicalConstants,format = "markdown", digits = 70)
