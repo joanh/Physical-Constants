@@ -20,10 +20,10 @@ Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.tx
 ## Code
 
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r results='hide', message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE, results='hide'}
 # Install packages through `install.packages` command and load them to the environment
 library(knitr)
 library(stringr)
@@ -32,15 +32,15 @@ library(printr)
 ```
 First we import the csv file from the [github repository](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)
 
-```{r evaluate=TRUE}
+```{r eval=TRUE}
 GH_url <- "https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv"
 PhysicalConstants <- read.csv(GH_url, header = TRUE, sep = ",",dec = ".")
 
 ```
 
-You can do it from your local computer too after downloading the file  "[Fundamental-Physical-Constants.csv](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)" through '[read.table](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html)' command:
+You can do it from your local computer after downloading the file  "[Fundamental-Physical-Constants.csv](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)" through '[read.table](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html)' command:
 
-```{r evaluate=FALSE}
+```{r eval=FALSE}
 # PhysicalConstants <- read.table("~/R/Physical Constants/Fundamental-Physical-Constants.csv",
 # header = TRUE, sep = ",",dec = ".")
 ```
@@ -71,7 +71,7 @@ PhysicalConstants$Uncertainty <- as.numeric(PhysicalConstants$Uncertainty)
 
 Just a quick graphical test in order to check everything went right, a histogram made from the count of values of the base 10 logarithm of the absolute value of each physical constant, in other words, the exponent of the constant, i.e. its *order of magnitude*.
 
-```{r, eval=FALSE, echo=TRUE}
+```{r, eval=TRUE, echo=TRUE, fig.width=12}
 histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Value)))) +
   geom_histogram(col="orange", 
                  aes(fill=..count..), binwidth= .75) +
@@ -80,10 +80,11 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
   geom_density(aes(y =..count..), colour="red", adjust=3, size=1) +
   ggtitle("Order of magnitude histogram for physical constants") +
   labs(x="Order of magnitude", y="Count")
+# 
+# ![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
 print(histogram)
 ```
 
-![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
 
 ## Table
 
