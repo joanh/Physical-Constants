@@ -73,12 +73,10 @@ histogram <- ggplot(data=PhysicalConstants, aes(log10(abs(PhysicalConstants$Valu
   ggtitle("Order of magnitude histogram for physical constants") +
   labs(x="Order of magnitude", y="Count")
 # 
-# ![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
-print(histogram)
+# print(histogram)
 ```
 
-![](README_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
-
+![](https://raw.githubusercontent.com/joanh/Physical-Constants/master/images/PChistogram.png)
 
 ## Table
 
