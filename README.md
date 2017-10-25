@@ -1,7 +1,7 @@
 # Fundamental Physical Constants
 Joanh  
 2015  
-Just a bit of gymnastics on data collation, R and Knitr to get the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
+Just a bit of gymnastics on data collation, R and Knitr to display the most exact available values of the [physical constants](https://en.wikipedia.org/wiki/Physical_constant).
 
 ## Data source
 
