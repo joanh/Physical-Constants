@@ -13,9 +13,6 @@ Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.tx
 ## Code
 
 
-```r
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 
 First we import the csv file from the [github repository](https://raw.githubusercontent.com/joanh/Physical-Constants/master/Fundamental-Physical-Constants.csv)

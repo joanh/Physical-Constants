@@ -19,7 +19,7 @@ Via [the raw ASCII data](http://physics.nist.gov/cuu/Constants/Table/allascii.tx
 
 ## Code
 
-```{r setup, include=TRUE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
